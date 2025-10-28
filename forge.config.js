@@ -1,17 +1,18 @@
-const { FusesPlugin } = require('@electron-forge/plugin-fuses');
-const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
-module.exports = {
+import { FusesPlugin } from '@electron-forge/plugin-fuses';
+import { FuseV1Options, FuseVersion } from '@electron/fuses';
+
+export default {
   publishers: [
     {
       name: '@electron-forge/publisher-github',
       config: {
         repository: {
-          owner: 'github-user-name',
-          name: 'github-repo-name'
+          owner: 'huangmy2',      // GitHub 用户名
+          name: 'my-electron'     // 仓库名
         },
-        prerelease: false,
-        draft: true
+        draft: true,              // 自动创建 Release 草稿
+        prerelease: false
       }
     }
   ],
@@ -42,8 +43,6 @@ module.exports = {
       name: '@electron-forge/plugin-auto-unpack-natives',
       config: {},
     },
-    // Fuses are used to enable/disable various Electron functionality
-    // at package time, before code signing the application
     new FusesPlugin({
       version: FuseVersion.V1,
       [FuseV1Options.RunAsNode]: false,
